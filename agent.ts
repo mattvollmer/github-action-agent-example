@@ -71,8 +71,11 @@ const agent = new blink.Agent();
 agent.on("request", async (request) => {
   const url = new URL(request.url);
   
+  console.log(`Received ${request.method} request to ${url.pathname}`);
+  
   // Handle scheduled Hacker News summary webhook (must be before Slack receiver)
   if (url.pathname === "/hn-summary" && request.method === "POST") {
+    console.log("Processing /hn-summary webhook...");
     const CHANNEL_ID = process.env.HN_SUMMARY_CHANNEL_ID || "C09FCMVAUB0";
     
     try {
