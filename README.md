@@ -82,15 +82,14 @@ schedule:
    3. Click **Settings** → **Secrets and variables** → **Actions**
    4. Click **New repository secret**
    5. Name: `AGENT_WEBHOOK_URL`
-   6. Value: Your production agent URL with the `/hn-summary` endpoint
-      - Example: `https://your-agent.blink.host/hn-summary`
+   6. Value: `https://your_webhook_id.blink.host` (no trailing slash)
    7. Click **Add secret**
    
    The GitHub Action (`.github/workflows/hn-summary.yml`) will automatically run daily at 9am ET and POST to this webhook URL.
 
 6. **Manual Testing**:
    ```bash
-   curl -X POST https://your-agent-url.blink.host/hn-summary
+   curl -X POST https://your_webhook_id.blink.host/hn-summary
    ```
 
 ## Development
@@ -101,5 +100,5 @@ blink dev
 
 Test the webhook locally:
 ```bash
-curl -X POST https://your-dev-url.blink.host/hn-summary
+curl -X POST https://your_webhook_id.blink.host/hn-summary
 ```
