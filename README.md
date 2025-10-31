@@ -6,7 +6,7 @@ A Blink agent that posts daily Hacker News summaries to Slack and responds to me
 
 ## Features
 
-- **Daily HN Summaries**: Automatically posts top 10 Hacker News stories every morning at 9am ET
+- **Daily HN Summaries**: Automatically posts top 10 Hacker News stories every morning at 10am ET
 - **Interactive Bot**: Responds to @mentions in channels and direct messages
 - **GitHub Action Scheduling**: Uses GitHub Actions to trigger daily summaries via webhook
 
