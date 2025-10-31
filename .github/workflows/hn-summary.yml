@@ -2,9 +2,9 @@ name: Daily Hacker News Summary
 
 on:
   schedule:
-    # Run at 9:00 AM ET (13:00 UTC during EST, 14:00 UTC during EDT)
-    # Using 14:00 UTC to cover EDT (most of the year)
-    - cron: '0 14 * * *'
+    # Run at 10:00 AM ET (14:00 UTC during EST, 15:00 UTC during EDT)
+    # Using 15:00 UTC to cover EDT (most of the year)
+    - cron: '0 15 * * *'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
