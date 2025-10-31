@@ -1,0 +1,18 @@
+name: Daily Hacker News Summary
+
+on:
+  schedule:
+    # Run at 9:00 AM ET (13:00 UTC during EST, 14:00 UTC during EDT)
+    # Using 14:00 UTC to cover EDT (most of the year)
+    - cron: '0 14 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  post-hn-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Hacker News Summary
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            ${{ secrets.AGENT_WEBHOOK_URL }}/hn-summary
