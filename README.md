@@ -1,6 +1,8 @@
 # Hacker News Slack Bot
 
 A Blink agent that posts daily Hacker News summaries to Slack and responds to mentions.
+<img width="1229" height="875" alt="image" src="https://github.com/user-attachments/assets/0e20e7cc-d66e-4f52-a32d-fc09bdc903f1" />
+
 
 ## Features
 
