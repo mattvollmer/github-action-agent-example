@@ -71,7 +71,7 @@ const agent = new blink.Agent();
 agent.on("request", async (request) => {
   const url = new URL(request.url);
   
-  // Handle scheduled Hacker News summary webhook
+  // Handle scheduled Hacker News summary webhook (must be before Slack receiver)
   if (url.pathname === "/hn-summary" && request.method === "POST") {
     const CHANNEL_ID = process.env.HN_SUMMARY_CHANNEL_ID || "C09FCMVAUB0";
     
@@ -111,8 +111,8 @@ agent.on("request", async (request) => {
         })
       );
       
-      // Create a chat to analyze the stories
-      const chat = await agent.chat.upsert(["hn-summary", new Date().toISOString().split('T')[0]]);
+      // Create a new chat for each summary request (uses timestamp for uniqueness)
+      const chat = await agent.chat.upsert(["hn-summary", Date.now()]);
       
       // Prepare story data for AI analysis
       const storyData = storiesWithComments.map((story: any, index: number) => {
@@ -156,13 +156,14 @@ After analyzing, post a formatted summary to Slack channel ${CHANNEL_ID} using t
         { behavior: "enqueue" }
       );
       
-      return new Response("Summary posted successfully", { status: 200 });
+      return new Response("Summary request queued successfully", { status: 200 });
     } catch (error) {
       console.error("Error posting HN summary:", error);
-      return new Response("Error posting summary", { status: 500 });
+      return new Response(`Error posting summary: ${error}`, { status: 500 });
     }
   }
   
+  // All other requests go to Slack receiver
   return receiver.handle(app, request);
 });
 
